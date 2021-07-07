@@ -7,26 +7,25 @@ import {ShopContext} from '../context/shop-context';
 import "./Products.css";
 
 function ProductsPage() {
-  const shopData = useContext(ShopContext);
-  console.log(shopData)
+  const context = useContext(ShopContext);
 
   return (
     <React.Fragment>
       <MainNavigation
-        cartItemNumber={shopData.cart?.reduce((count, curItem) => {
+        cartItemNumber={context.cart.reduce((count, curItem) => {
           return count + curItem.quantity;
         }, 0)}
       />
       <main className="products">
         <ul>
-          {shopData.products?.map((product) => (
+          {context.products.map((product) => (
             <li key={product.id}>
               <div>
                 <strong>{product.title}</strong> - ${product.price}
               </div>
               <div>
                 <button
-                  onClick={shopData.addProductToCart.bind(this, product)}
+                  onClick={context.addProductToCart.bind(this, product)}
                 >
                   Add to Cart
                 </button>
