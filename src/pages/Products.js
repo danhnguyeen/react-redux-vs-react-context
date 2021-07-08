@@ -1,20 +1,17 @@
-import React, { useContext } from "react";
-// import { connect } from "react-redux";
+import React from "react";
 
 import MainNavigation from "../components/MainNavigation";
-import { ShopContext } from "../context/shop-context";
-import { CountContext } from "../context/count-context";
-// import { addProductToCart } from "../store/actions";
+import {useShop, useCount} from "../context";
 import "./Products.css";
 
 function ProductsPage() {
-  const context = useContext(ShopContext);
-  const countContext = useContext(CountContext);
+  const shopContext = useShop();
+  const countContext = useCount();
 
   return (
     <React.Fragment>
       <MainNavigation
-        cartItemNumber={context.cart.reduce((count, curItem) => {
+        cartItemNumber={shopContext.cart.reduce((count, curItem) => {
           return count + curItem.quantity;
         }, 0)}
       />
@@ -22,13 +19,13 @@ function ProductsPage() {
         <strong>Count is {countContext.count}</strong>
         <button onClick={countContext.addCount}>Add</button>
         <ul>
-          {context.products.map((product) => (
+          {shopContext.products.map((product) => (
             <li key={product.id}>
               <div>
                 <strong>{product.title}</strong> - ${product.price}
               </div>
               <div>
-                <button onClick={context.addProductToCart.bind(this, product)}>
+                <button onClick={shopContext.addProductToCart.bind(this, product)}>
                   Add to Cart
                 </button>
               </div>

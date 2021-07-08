@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useContext, useReducer } from "react";
 
 import shopReducer, { ADD_PRODUCT, REMOVE_PRODUCT } from "./shop-reducers";
 
@@ -11,7 +11,7 @@ export const ShopContext = React.createContext({
   removeProductFromCart: () => {},
 });
 
-const ShopContextProvider = ({ children }) => {
+export const ShopContextProvider = ({ children }) => {
   const products = [
     { id: "p1", title: "Gaming Mouse", price: 29.99 },
     { id: "p2", title: "Harry Potter 3", price: 9.99 },
@@ -46,4 +46,9 @@ const ShopContextProvider = ({ children }) => {
   );
 };
 
-export default ShopContextProvider;
+const useShop = () => {
+  const contextValue = useContext(ShopContext);
+  return contextValue;
+}
+
+export default useShop;

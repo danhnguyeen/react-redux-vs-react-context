@@ -11,6 +11,9 @@ const mainNavigation = props => (
           <NavLink to="/">Products</NavLink>
         </li>
         <li>
+          <NavLink to="/test-context">Cart ({props.cartItemNumber}) - same Count</NavLink>
+        </li>
+        <li>
           <NavLink to="/cart">Cart ({props.cartItemNumber})</NavLink>
         </li>
       </ul>

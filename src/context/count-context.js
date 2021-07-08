@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useContext } from "react";
 
 import countReducer, { ADD_COUNT } from "./count-reducers";
 
@@ -9,7 +9,7 @@ export const CountContext = React.createContext({
   addCount: () => {},
 });
 
-const CountContextProvider = ({ children }) => {
+export const CountContextProvider = ({ children }) => {
   const [countState, dispatch] = useReducer(countReducer, initialState);
 
   const addCount = () => {
@@ -28,4 +28,9 @@ const CountContextProvider = ({ children }) => {
   );
 };
 
-export default CountContextProvider;
+const useCount = () => {
+  const contextValue = useContext(CountContext);
+  return contextValue;
+};
+
+export default useCount;
