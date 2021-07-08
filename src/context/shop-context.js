@@ -1,6 +1,8 @@
 import React, { useState, useReducer } from "react";
 
-import shopReducer, { ADD_PRODUCT, REMOVE_PRODUCT } from "./reducers";
+import shopReducer, { ADD_PRODUCT, REMOVE_PRODUCT } from "./shop-reducers";
+
+const initialState = { cart: [] };
 
 export const ShopContext = React.createContext({
   products: [],
@@ -16,7 +18,7 @@ const ShopContextProvider = ({ children }) => {
     { id: "p3", title: "Used plastic bottle", price: 0.99 },
     { id: "p4", title: "Half-dried plant", price: 2.99 },
   ];
-  const [cartState, dispatch] = useReducer(shopReducer, { cart: [] });
+  const [cartState, dispatch] = useReducer(shopReducer, initialState);
 
   const addProductToCart = (product) => {
     setTimeout(() => {
